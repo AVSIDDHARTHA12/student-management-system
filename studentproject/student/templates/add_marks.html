@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Student Marks{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-primary text-white text-center py-3">
+                <h4 class="mb-0">Add Student Marks</h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <!-- Select Student -->
+                    <div class="mb-3">
+                        <label for="student" class="form-label fw-semibold">Select Student</label>
+                        <select name="student" id="student" class="form-select" required>
+                            <option value="" disabled selected>-- Select a student --</option>
+                            {% for s in students %}
+                                <option value="{{ s.id }}">{{ s.roll }} - {{ s.name }} ({{ s.course }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Telugu Marks -->
+                    <div class="mb-3">
+                        <label for="telugu" class="form-label fw-semibold">Telugu</label>
+                        <input type="number" class="form-control" id="telugu" name="telugu" min="0" max="100" placeholder="Enter Telugu marks" required>
+                    </div>
+
+                    <!-- English Marks -->
+                    <div class="mb-3">
+                        <label for="english" class="form-label fw-semibold">English</label>
+                        <input type="number" class="form-control" id="english" name="english" min="0" max="100" placeholder="Enter English marks" required>
+                    </div>
+
+                    <!-- Maths Marks -->
+                    <div class="mb-3">
+                        <label for="maths" class="form-label fw-semibold">Maths</label>
+                        <input type="number" class="form-control" id="maths" name="maths" min="0" max="100" placeholder="Enter Maths marks" required>
+                    </div>
+
+                    <!-- Science Marks -->
+                    <div class="mb-3">
+                        <label for="science" class="form-label fw-semibold">Science</label>
+                        <input type="number" class="form-control" id="science" name="science" min="0" max="100" placeholder="Enter Science marks" required>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <a href="{% url 'student_list' %}" class="btn btn-outline-secondary me-md-2">Cancel</a>
+                        <button type="submit" class="btn btn-success px-4">Save Marks</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

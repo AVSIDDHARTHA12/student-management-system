@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Details - {{ student.name }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-warning text-dark py-3">
+                <h4 class="mb-0 fw-bold">Edit Student Details & Marks</h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <h5 class="text-primary mb-3">Student Information</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Roll Number</label>
+                            <input type="text" class="form-control" value="{{ student.roll }}" disabled>
+                            <small class="text-muted">Roll number cannot be modified.</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Student Name</label>
+                            <input type="text" name="name" class="form-control" value="{{ student.name }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Age</label>
+                            <input type="number" name="age" class="form-control" value="{{ student.age }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Course</label>
+                            <input type="text" name="course" class="form-control" value="{{ student.course }}" required>
+                        </div>
+                    </div>
+
+                    <h5 class="text-primary mb-3">Academic Marks</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-3">
+                            <label class="form-label fw-semibold">Telugu</label>
+                            <input type="number" name="telugu" class="form-control" value="{{ marks.telugu|default:'' }}" min="0" max="100">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-semibold">English</label>
+                            <input type="number" name="english" class="form-control" value="{{ marks.english|default:'' }}" min="0" max="100">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-semibold">Maths</label>
+                            <input type="number" name="maths" class="form-control" value="{{ marks.maths|default:'' }}" min="0" max="100">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-semibold">Science</label>
+                            <input type="number" name="science" class="form-control" value="{{ marks.science|default:'' }}" min="0" max="100">
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{% url 'view_student' %}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-success px-4">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
